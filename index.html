@@ -1,95 +1,17 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой Видео Сайт</title>
     <style>
-        /* Убираем лишние отступы */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body, html { 
-            width: 100%; 
-            height: 100%; 
-            overflow: hidden; 
-            background-color: #000; 
-            font-family: sans-serif; 
-        }
-
-        /* Контейнер для видео */
-        .video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        video {
-            min-width: 100%; 
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: cover; /* Растягивает видео на весь экран без полос */
-        }
-
-        /* Слой поверх видео с кнопкой */
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5); /* Затемнение */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
-
-        h1 { color: white; margin-bottom: 20px; text-align: center; font-size: 24px; }
-
-        .play-btn {
-            padding: 15px 30px;
-            font-size: 20px;
-            cursor: pointer;
-            border: none;
-            border-radius: 50px;
-            background: #ff0000;
-            color: white;
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(255,0,0,0.5);
-        }
+        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        video { width: 100%; height: 100%; object-fit: contain; }
     </style>
 </head>
 <body>
 
-    <div class="video-container">
-        <video id="myVideo" playsinline webkit-playsinline loop muted>
-            <source src="video.mp4" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-        </video>
-    </div>
-
-    <div class="overlay" id="overlay">
-        <h1>Тут видео, которое я выбрал! 🎬</h1>
-        <button class="play-btn" onclick="startVideo()">СМОТРЕТЬ СО ЗВУКОМ</button>
-    </div>
-
-    <script>
-        function startVideo() {
-            var video = document.getElementById("myVideo");
-            var overlay = document.getElementById("overlay");
-            
-            video.muted = false; // Включаем звук
-            video.play(); // Запускаем видео
-            overlay.style.display = "none"; // Прячем кнопку и текст
-        }
-    </script>
+    <video controls autoplay muted playsinline>
+        <source src="video.mp4" type="video/mp4">
+        Браузер не поддерживает этот видеофайл.
+    </video>
 
 </body>
 </html>
