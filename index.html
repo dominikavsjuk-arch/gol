@@ -5,22 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой Видео Сайт</title>
     <style>
+        /* Убираем лишние отступы */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; overflow: hidden; background-color: black; font-family: sans-serif; }
         
-        /* Видео на весь экран */
-        #myVideo {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%; 
-            min-height: 100%;
-            z-index: -1;
+        body, html { 
+            width: 100%; 
+            height: 100%; 
+            overflow: hidden; 
+            background-color: #000; 
+            font-family: sans-serif; 
         }
 
-        /* Контент поверх видео */
-        .overlay {
-            position: absolute;
+        /* Контейнер для видео */
+        .video-container {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -28,42 +26,68 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(0,0,0,0.4); /* Затемнение, чтобы кнопки было видно */
         }
 
-        .btn-play {
-            padding: 20px 40px;
-            font-size: 24px;
-            color: white;
-            background: #ff0000;
+        video {
+            min-width: 100%; 
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover; /* Растягивает видео на весь экран без полос */
+        }
+
+        /* Слой поверх видео с кнопкой */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5); /* Затемнение */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        h1 { color: white; margin-bottom: 20px; text-align: center; font-size: 24px; }
+
+        .play-btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
             border: none;
             border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
-            transition: 0.3s;
+            background: #ff0000;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(255,0,0,0.5);
         }
-
-        .btn-play:hover { transform: scale(1.1); background: #cc0000; }
     </style>
 </head>
 <body>
 
-    <video id="myVideo" loop>
-        <source src="video.mp4" type="video/mp4">
-        Ваш браузер не поддерживает видео.
-    </video>
+    <div class="video-container">
+        <video id="myVideo" playsinline webkit-playsinline loop muted>
+            <source src="video.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+    </div>
 
     <div class="overlay" id="overlay">
-        <button class="btn-play" onclick="playVideo()">ЗАПУСТИТЬ ВИДЕО 🎬</button>
+        <h1>Тут видео, которое я выбрал! 🎬</h1>
+        <button class="play-btn" onclick="startVideo()">СМОТРЕТЬ СО ЗВУКОМ</button>
     </div>
 
     <script>
-        function playVideo() {
+        function startVideo() {
             var video = document.getElementById("myVideo");
             var overlay = document.getElementById("overlay");
             
+            video.muted = false; // Включаем звук
             video.play(); // Запускаем видео
-            overlay.style.display = "none"; // Прячем кнопку
+            overlay.style.display = "none"; // Прячем кнопку и текст
         }
     </script>
 
